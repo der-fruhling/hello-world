@@ -1,3 +1,4 @@
 kernel.h
 kernel-raw.c
 kernel.make
+output.c
