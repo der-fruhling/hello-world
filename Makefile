@@ -1,4 +1,7 @@
-all: kernel output.bin
+all: clean kernel output.bin
+
+clean: clean_kernel
+	rm -rf out
 
 clean_kernel:
 	rm -rf kernel.h kernel-raw.c kernel.make
@@ -9,6 +12,7 @@ kernel: clean_kernel
 	wget -O kernel.make https://raw.githubusercontent.com/liamos-operating-system/liamos/master/Makefile
 
 output.bin: src/hello.c
+	mkdir out
 	cp src/hello.c src/output.c
 	${MAKE} -f kernel.make output.bin
 	rm src/output.c
