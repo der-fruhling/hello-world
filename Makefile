@@ -13,5 +13,5 @@ kernel: clean_kernel
 output.bin: hello.bin
 	mv hello.bin output.bin
 
-%.bin: src/%.c
-	clang -fasm-blocks -masm=intel -Wl,--oformat=binary,-Ttext,0x1000,-Trodata,0x0000,-Tdata,0x0A00,-Tbss,0x0A00 -nostdlib -nostartfiles -nodefaultlibs -m16 -Os -o $@ $<
+%.bin: src/%.c kernel-raw.c kernel.h
+	clang -fasm-blocks -masm=intel -Wl,--oformat=binary,-Ttext,0x1000,-Trodata,0x0000,-Tdata,0x0A00,-Tbss,0x0A00 -nostdlib -nostartfiles -nodefaultlibs -m16 -Os -o $@ $< kernel-raw.c
